@@ -5,6 +5,15 @@ let socketInstance = null;
 
 
 export const initializeSocket = (projectId) => {
+    // If socket already exists and is for the same project, don't recreate it
+    if (socketInstance && socketInstance.query?.projectId === projectId) {
+        return socketInstance;
+    }
+
+    // Disconnect old socket if it exists
+    if (socketInstance) {
+        socketInstance.disconnect();
+    }
 
     socketInstance = socket(import.meta.env.VITE_API_URL, {
         auth: {
@@ -16,13 +25,21 @@ export const initializeSocket = (projectId) => {
     });
 
     return socketInstance;
-
 }
 
 export const receiveMessage = (eventName, cb) => {
+    if (!socketInstance) return;
     socketInstance.on(eventName, cb);
 }
 
 export const sendMessage = (eventName, data) => {
+    if (!socketInstance) return;
     socketInstance.emit(eventName, data);
+}
+
+export const disconnectSocket = () => {
+    if (socketInstance) {
+        socketInstance.disconnect();
+        socketInstance = null;
+    }
 }

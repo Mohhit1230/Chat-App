@@ -1,22 +1,84 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-* {
-  margin: 0%;
-  padding: 0%;
-  box-sizing: border-box;
+@theme {
+  --font-sans: 'Montserrat', system-ui, sans-serif;
+  --font-display: 'Edu VIC WA NT Hand', cursive;
+
+  --color-accent: #e94d37;
+  --color-accent-light: #f06b58;
+  --color-accent-dark: #d44330;
+
+  --color-surface-50: #f0f1f4;
+  --color-surface-100: #e0e3eb;
+  --color-surface-200: #c8ccd8;
+  --color-surface-300: #9ca3b4;
+  --color-surface-400: #6b7385;
+  --color-surface-500: #4d5568;
+  --color-surface-600: #353b4a;
+  --color-surface-700: #2d3344;
+  --color-surface-800: #22262f;
+  --color-surface-900: #1b1f2a;
+  --color-surface-950: #13161e;
+
+  --animate-float: float 12s ease-in-out infinite;
+  --animate-slide-up: slideUp 0.4s ease-out;
+  --animate-scale-in: scaleIn 0.3s ease-out;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0) translateX(0);
+    }
+
+    50% {
+      transform: translateY(-20px) translateX(10px);
+    }
+  }
+
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
 
-html,
 body {
-  height: 100%;
-  width: 100%;
+  font-family: var(--font-sans);
+  background-color: var(--color-surface-900);
+  color: var(--color-surface-50);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.message-box{
-  scroll-behavior: smooth;
+::selection {
+  background-color: rgba(233, 77, 55, 0.25);
+  color: white;
 }
-.message-box::-webkit-scrollbar{
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
